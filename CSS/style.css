@@ -1,3 +1,7 @@
+:root {
+  --item-color: #ff5da6;
+}
+
 * {
   padding: 0px;
   margin: 0px;
@@ -16,7 +20,7 @@ body {
   justify-content: center;
 }
 .card {
-  background-color: pink;
+  background-color: #f5c8d2;
   width: 400px;
   padding: 30px;
   display: flex;
@@ -31,6 +35,23 @@ body {
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+  transition: 0.3s;
+}
+
+.card,
+i,
+img,
+.dot {
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+  box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.2);
+}
+
+.card i:not(.play):hover {
+  background-color: #ddd;
+}
+
+.card i.play:hover {
+  background-color: #d14b87;
 }
 
 .card div {
@@ -42,7 +63,7 @@ body {
   display: flex;
   justify-content: space-between;
   font-size: 30px;
-  color: red;
+  color: var(--item-color);
 }
 
 .card .tools i {
@@ -76,7 +97,7 @@ body {
 }
 
 .card .player {
-  background-color: red;
+  background-color: var(--item-color);
   height: 4px;
   margin: 40px 0px;
   position: relative;
@@ -84,7 +105,7 @@ body {
 
 .card .player .dot {
   position: absolute;
-  background-color: red;
+  background-color: var(--item-color);
   width: 20px;
   height: 20px;
   border: 5px solid white;
@@ -102,14 +123,14 @@ body {
 
 .card .controls .push {
   background-color: white;
-  color: red;
+  color: var(--item-color);
   width: 70px;
   height: 70px;
   font-size: 20px;
 }
 
 .card .controls .play {
-  background-color: red;
+  background-color: var(--item-color);
   color: white;
   width: 100px;
   height: 100px;
