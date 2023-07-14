@@ -28,6 +28,7 @@ const pauseBtn = document.querySelector(".pause");
 const nextBtn = document.querySelector(".next");
 const prevBtn = document.querySelector(".back");
 const repeatBtn = document.querySelector(".repeat");
+const record = document.querySelector("img");
 
 const dot = document.querySelector(".dot");
 
@@ -36,13 +37,13 @@ function playAudio() {
     const currentAudio = myAudios[currentAudioIndex];
     const songTitle = document.querySelector(".info h2");
     const songArtist = document.querySelector(".info p");
-    // const dot = document.querySelector(".dot");
 
     audio.src = currentAudio.file;
     songTitle.textContent = currentAudio.title();
     songArtist.textContent = currentAudio.artist();
     dot.style.left = 0;
   }
+  record.style.animationPlayState = "running";
   playBtn.style.display = "none";
   pauseBtn.style.display = "flex";
 
@@ -53,6 +54,8 @@ function playAudio() {
 function pauseAudio() {
   playBtn.style.display = "flex";
   pauseBtn.style.display = "none";
+
+  record.style.animationPlayState = "paused";
 
   audio.pause();
 }
@@ -112,7 +115,7 @@ function dragDot(e) {
 }
 
 function dragEffect(e) {
-  audio.pause();
+  pauseAudio();
   e.preventDefault();
 
   currentPos = firstPos - e.clientX;
@@ -137,7 +140,7 @@ function leaveEffect() {
   } else if (distanceRatio == 0) {
     prevTrack();
   } else {
-    audio.play();
+    playAudio();
   }
   document.removeEventListener("pointermove", dragEffect);
   document.removeEventListener("pointerup", leaveEffect);
