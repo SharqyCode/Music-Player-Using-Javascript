@@ -2,7 +2,7 @@ let myAudios = [
   {
     file: "./music/Joachim Heinrich - Flying Kites.m4a",
     artist: function () {
-      return this.file.split(" - ")[0].substring(8);
+      return this.file.split(" - ")[0].substring(9);
     },
     title: function () {
       return this.file.split(" - ")[1].split(".")[0];
