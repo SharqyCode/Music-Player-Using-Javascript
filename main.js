@@ -208,7 +208,7 @@ function loadTracks() {
   myAudios.forEach((audio) => {
     let track = document.createElement("li");
     let trackImg = document.createElement("img");
-    trackImg.src = "./images/pngimg.com - vinyl_PNG102.png";
+    trackImg.src = "images/pngimg.com - vinyl_PNG102.png";
     let trackInfo = document.createElement("div");
     trackInfo.classList.add("info");
     let songName = document.createElement("h3");
@@ -248,7 +248,7 @@ repeatBtn.addEventListener("click", toggleRepeat);
 shuffleBtn.addEventListener("click", toggleShuffle);
 
 player.addEventListener("click", scrub);
-dot.addEventListener("pointerdown", dragDot);
+// dot.addEventListener("pointerdown", dragDot);
 
 audio.addEventListener("ended", nextTrack);
 audio.addEventListener("timeupdate", updateDotlocation);
