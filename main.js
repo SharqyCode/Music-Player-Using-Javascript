@@ -138,38 +138,45 @@ function updateDotlocation() {
   dot.style.left = `${(currentTime / duration) * 100}%`;
 }
 
-let firstPos = 0;
-let currentPos = 0;
+let mousePos = 0,
+  dotPos = 0,
+  deltaPos = 0,
+  newPos = 0;
+
 function dragDot(e) {
-  firstPos = e.clientX;
+  mousePos = e.clientX;
+  dotPos = dot.offsetLeft;
   document.addEventListener("pointermove", dragEffect);
   document.addEventListener("pointerup", leaveEffect);
 }
 
 function dragEffect(e) {
-  pauseAudio();
   e.preventDefault();
-
+  pauseAudio();
   dot.style.cursor = "grab";
 
-  currentPos = firstPos - e.clientX;
-  firstPos = e.clientX;
+  deltaPos = e.clientX - mousePos;
+  newPos = dotPos + deltaPos;
 
-  if (dot.offsetLeft - currentPos > dot.parentElement.clientWidth) {
-    dot.style.left = dot.parentElement.clientWidth;
-  } else if (dot.offsetLeft - currentPos < 0) {
-    dot.style.left = 0;
-  } else {
-    dot.style.left = dot.offsetLeft - currentPos + "px";
+  if (newPos > dot.parentElement.clientWidth) {
+    newPos = dot.parentElement.clientWidth;
+  } else if (newPos < 0) {
+    newPos = 0;
   }
+  dot.style.left = newPos + "px";
 }
 
 function leaveEffect() {
-  const distanceRatio =
-    Number.parseInt(dot.style.left) / dot.parentElement.clientWidth;
-  const currentTime = audio.duration * distanceRatio;
-  // console.log(distanceRatio);
-  // console.log(currentTime);
+  document.removeEventListener("pointerup", leaveEffect);
+  document.removeEventListener("pointermove", dragEffect);
+
+  const distanceRatio = dot.offsetLeft / dot.parentElement.clientWidth;
+  const currentTime = Math.round(audio.duration * distanceRatio);
+  console.log("DOL: " + dot.offsetLeft);
+  console.log("DPW: " + dot.parentElement.clientWidth);
+  console.log("DR: " + distanceRatio);
+  console.log("AD: " + audio.duration);
+  console.log("CT: " + currentTime);
   audio.currentTime = currentTime.toPrecision(2);
   if (distanceRatio == 1) {
     nextTrack();
@@ -179,8 +186,6 @@ function leaveEffect() {
     isPlaying = true;
     playAudio();
   }
-  document.removeEventListener("pointermove", dragEffect);
-  document.removeEventListener("pointerup", leaveEffect);
 }
 
 function scrub(e) {
