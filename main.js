@@ -1,35 +1,35 @@
 let myAudios = [
   {
-    file: "music/Joachim Heinrich - Flying Kites.m4a",
+    file: "./music/Joachim Heinrich - Flying Kites.m4a",
     artist: function () {
-      return this.file.split(" - ")[0].substring(7);
+      return this.file.split(" - ")[0].substring(8);
     },
     title: function () {
       return this.file.split(" - ")[1].split(".")[0];
     },
   },
   {
-    file: "music/Kalp Kırıkları - Toygar Işıklı.mp3",
+    file: "./music/Kalp Kırıkları - Toygar Işıklı.mp3",
     artist: function () {
-      return this.file.split(" - ")[0].substring(7);
+      return this.file.split(" - ")[0].substring(8);
     },
     title: function () {
       return this.file.split(" - ")[1].split(".")[0];
     },
   },
   {
-    file: "music/Lost - Giles Lamb.m4a",
+    file: "./music/Lost - Giles Lamb.m4a",
     artist: function () {
-      return this.file.split(" - ")[0].substring(7);
+      return this.file.split(" - ")[0].substring(8);
     },
     title: function () {
       return this.file.split(" - ")[1].split(".")[0];
     },
   },
   {
-    file: "music/Max Ritcher - On The Nature of Daylight.mp3",
+    file: "./music/Max Ritcher - On The Nature of Daylight.mp3",
     artist: function () {
-      return this.file.split(" - ")[0].substring(7);
+      return this.file.split(" - ")[0].substring(8);
     },
     title: function () {
       return this.file.split(" - ")[1].split(".")[0];
@@ -247,7 +247,6 @@ repeatBtn.addEventListener("click", toggleRepeat);
 shuffleBtn.addEventListener("click", toggleShuffle);
 
 player.addEventListener("click", scrub);
-// dot.addEventListener("pointerdown", dragDot);
 
 audio.addEventListener("ended", nextTrack);
 audio.addEventListener("timeupdate", updateDotlocation);
@@ -256,3 +255,11 @@ window.addEventListener("load", loadTracks);
 window.addEventListener("load", setLastTrack);
 
 trackList.addEventListener("click", clickTrack);
+
+document.addEventListener("keydown", (e) => {
+  if ((e.code = "ArrowRight")) {
+    nextTrack();
+  } else if ((e.code = "ArrowLeft")) {
+    prevTrack();
+  }
+});
