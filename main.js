@@ -1,6 +1,6 @@
 let myAudios = [
   {
-    file: "/music/Bang boys - Explosion Sound Effect.mpeg",
+    file: "/music/Joachim Heinrich - Flying Kites.m4a",
     artist: function () {
       return this.file.split(" - ")[0].substring(7);
     },
@@ -17,7 +17,26 @@ let myAudios = [
       return this.file.split(" - ")[1].split(".")[0];
     },
   },
+  {
+    file: "/music/Lost - Giles Lamb.m4a",
+    artist: function () {
+      return this.file.split(" - ")[0].substring(7);
+    },
+    title: function () {
+      return this.file.split(" - ")[1].split(".")[0];
+    },
+  },
+  {
+    file: "/music/Max Ritcher - On The Nature of Daylight.mp3",
+    artist: function () {
+      return this.file.split(" - ")[0].substring(7);
+    },
+    title: function () {
+      return this.file.split(" - ")[1].split(".")[0];
+    },
+  },
 ];
+
 let audio = new Audio();
 let currentAudioIndex = 0;
 let isPlaying = false;
@@ -31,12 +50,13 @@ const repeatBtn = document.querySelector(".repeat");
 const record = document.querySelector("img");
 const player = document.querySelector(".player");
 const dot = document.querySelector(".dot");
+const trackList = document.querySelector(".tracks");
 
 function playAudio() {
   if (!isPlaying) {
     const currentAudio = myAudios[currentAudioIndex];
-    const songTitle = document.querySelector(".info h2");
-    const songArtist = document.querySelector(".info p");
+    const songTitle = document.querySelector(".card .info h2");
+    const songArtist = document.querySelector(".card .info p");
 
     audio.src = currentAudio.file;
     songTitle.textContent = currentAudio.title();
@@ -104,17 +124,6 @@ function updateDotlocation() {
   dot.style.left = `${(currentTime / duration) * 100}%`;
 }
 
-function setLastTrack() {
-  const currentAudio = myAudios[currentAudioIndex];
-  const songTitle = document.querySelector(".info h2");
-  const songArtist = document.querySelector(".info p");
-
-  audio.src = currentAudio.file;
-  songTitle.textContent = currentAudio.title();
-  songArtist.textContent = currentAudio.artist();
-  dot.style.left = 0;
-}
-
 let firstPos = 0;
 let currentPos = 0;
 function dragDot(e) {
@@ -163,6 +172,54 @@ function scrub(e) {
   leaveEffect();
 }
 
+function setLastTrack() {
+  const currentAudio = myAudios[currentAudioIndex];
+  const songTitle = document.querySelector(".card .info h2");
+  const songArtist = document.querySelector(".card .info p");
+
+  audio.src = currentAudio.file;
+  songTitle.textContent = currentAudio.title();
+  songArtist.textContent = currentAudio.artist();
+  dot.style.left = 0;
+}
+
+function loadTracks() {
+  myAudios.forEach((audio) => {
+    let track = document.createElement("li");
+    let trackImg = document.createElement("img");
+    trackImg.src = "/images/pngimg.com - vinyl_PNG102.png";
+    let trackInfo = document.createElement("div");
+    trackInfo.classList.add("info");
+    let songName = document.createElement("h3");
+    songName.textContent = audio.title();
+    let songArtist = document.createElement("p");
+    songArtist.textContent = audio.artist();
+    trackInfo.appendChild(songName);
+    trackInfo.appendChild(songArtist);
+    track.appendChild(trackImg);
+    track.appendChild(trackInfo);
+    trackList.appendChild(track);
+  });
+}
+
+function clickTrack(e) {
+  const indexNow = currentAudioIndex;
+  currentAudioIndex = Array.from(trackList.children).indexOf(
+    getTrackLi(e.target)
+  );
+  console.log(indexNow);
+  console.log(currentAudioIndex);
+  isPlaying = false;
+  playAudio();
+}
+
+function getTrackLi(target) {
+  while (target.tagName != "LI") {
+    target = target.parentElement;
+  }
+  return target;
+}
+
 playBtn.addEventListener("click", playAudio);
 pauseBtn.addEventListener("click", pauseAudio);
 nextBtn.addEventListener("click", nextTrack);
@@ -175,4 +232,7 @@ dot.addEventListener("pointerdown", dragDot);
 audio.addEventListener("ended", nextTrack);
 audio.addEventListener("timeupdate", updateDotlocation);
 
+window.addEventListener("load", loadTracks);
 window.addEventListener("load", setLastTrack);
+
+trackList.addEventListener("click", clickTrack);

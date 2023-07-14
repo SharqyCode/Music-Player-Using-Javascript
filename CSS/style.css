@@ -1,5 +1,10 @@
 :root {
-  --item-color: #ff5da6;
+  --detail-color-1: #ff5da6;
+  --detail-color-1-hover: #d14b87;
+  --bg-color: #f5c8d2;
+  --detail-color-2: #fff;
+  --detail-color-2-hover: #ddd;
+  --detail-color-2-click: #9a98ff;
 }
 
 * {
@@ -18,9 +23,57 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
+
+.tracks {
+  position: absolute;
+  left: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--bg-color);
+  width: 300px;
+  border-radius: 5px;
+}
+
+.tracks::before {
+  content: "Tracks";
+  background-color: var(--bg-color);
+  position: absolute;
+  padding: 10px;
+  top: -38px;
+  left: 0;
+  border-radius: 5px;
+  font-weight: 600;
+}
+
+.tracks li {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  background-color: var(--detail-color-1);
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.tracks li:hover {
+  background-color: var(--detail-color-1-hover);
+}
+
+.tracks img {
+  width: 50px;
+  height: 50px;
+}
+
+.tracks .info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
 .card {
-  background-color: #f5c8d2;
+  background-color: var(--bg-color);
   width: 400px;
   padding: 30px;
   display: flex;
@@ -49,12 +102,12 @@ img,
 
 .card i:not(.play):hover,
 .card i:not(.pause):hover {
-  background-color: #ddd;
+  background-color: var(--detail-color-2-hover);
 }
 
 .card i.play:hover,
 .card i.pause:hover {
-  background-color: #d14b87;
+  background-color: var(--detail-color-1-hover);
 }
 
 .card div {
@@ -66,11 +119,11 @@ img,
   display: flex;
   justify-content: space-between;
   font-size: 30px;
-  color: var(--item-color);
+  color: var(--detail-color-1);
 }
 
 .card .tools i {
-  background-color: white;
+  background-color: var(--detail-color-2);
   width: 40px;
   height: 40px;
   font-size: 15px;
@@ -78,7 +131,7 @@ img,
 }
 
 .card .tools i.repeat-on {
-  background-color: #9a98ff;
+  background-color: var(--detail-color-2-click);
 }
 
 .card .info {
@@ -90,7 +143,7 @@ img,
 .card .info img {
   width: 200px;
   height: 200px;
-  border: 10px solid white;
+  border: 10px solid var(--detail-color-2);
   border-radius: 50%;
   margin: 40px 0px;
   animation-duration: 10s;
@@ -120,7 +173,7 @@ img,
 }
 
 .card .player {
-  background-color: var(--item-color);
+  background-color: var(--detail-color-1);
   height: 4px;
   margin: 40px 0px;
   position: relative;
@@ -129,10 +182,10 @@ img,
 
 .card .player .dot {
   position: absolute;
-  background-color: var(--item-color);
+  background-color: var(--detail-color-1);
   width: 20px;
   height: 20px;
-  border: 5px solid white;
+  border: 5px solid var(--detail-color-2);
   border-radius: 50%;
   left: 0;
   top: 50%;
@@ -146,8 +199,8 @@ img,
 }
 
 .card .controls .push {
-  background-color: white;
-  color: var(--item-color);
+  background-color: var(--detail-color-2);
+  color: var(--detail-color-1);
   width: 70px;
   height: 70px;
   font-size: 20px;
@@ -155,8 +208,8 @@ img,
 
 .card .controls .play,
 .card .controls .pause {
-  background-color: var(--item-color);
-  color: white;
+  background-color: var(--detail-color-1);
+  color: var(--detail-color-2);
   width: 100px;
   height: 100px;
   font-size: 28px;
