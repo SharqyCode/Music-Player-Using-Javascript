@@ -1,6 +1,6 @@
 let myAudios = [
   {
-    file: "./music/Joachim Heinrich - Flying Kites.m4a",
+    file: "music/Joachim Heinrich - Flying Kites.m4a",
     artist: function () {
       return this.file.split(" - ")[0].substring(7);
     },
@@ -9,7 +9,7 @@ let myAudios = [
     },
   },
   {
-    file: "./music/Kalp Kırıkları - Toygar Işıklı.mp3",
+    file: "music/Kalp Kırıkları - Toygar Işıklı.mp3",
     artist: function () {
       return this.file.split(" - ")[0].substring(7);
     },
@@ -18,7 +18,7 @@ let myAudios = [
     },
   },
   {
-    file: "./music/Lost - Giles Lamb.m4a",
+    file: "music/Lost - Giles Lamb.m4a",
     artist: function () {
       return this.file.split(" - ")[0].substring(7);
     },
@@ -27,7 +27,7 @@ let myAudios = [
     },
   },
   {
-    file: "./music/Max Ritcher - On The Nature of Daylight.mp3",
+    file: "music/Max Ritcher - On The Nature of Daylight.mp3",
     artist: function () {
       return this.file.split(" - ")[0].substring(7);
     },
@@ -45,31 +45,24 @@ let isShuffle = false;
 
 const playBtn = document.querySelector(".play");
 const pauseBtn = document.querySelector(".pause");
-
 const nextBtn = document.querySelector(".next");
 const prevBtn = document.querySelector(".back");
-
 const repeatBtn = document.querySelector(".repeat");
 const shuffleBtn = document.querySelector(".shuffle");
-
 const record = document.querySelector("img");
-
 const player = document.querySelector(".player");
 const dot = document.querySelector(".dot");
-
 const trackList = document.querySelector(".tracks");
 
 function playAudio() {
-  if (!isPlaying) {
-    const currentAudio = myAudios[currentAudioIndex];
-    const songTitle = document.querySelector(".card .info h2");
-    const songArtist = document.querySelector(".card .info p");
+  const currentAudio = myAudios[currentAudioIndex];
+  const songTitle = document.querySelector(".card .info h2");
+  const songArtist = document.querySelector(".card .info p");
 
-    audio.src = currentAudio.file;
-    songTitle.textContent = currentAudio.title();
-    songArtist.textContent = currentAudio.artist();
-    dot.style.left = 0;
-  }
+  audio.src = currentAudio.file;
+  songTitle.textContent = currentAudio.title();
+  songArtist.textContent = currentAudio.artist();
+  dot.style.left = 0;
 
   Array.from(trackList.children).forEach((track) => {
     track.style.backgroundColor = "#ff5da6";
@@ -263,11 +256,3 @@ window.addEventListener("load", loadTracks);
 window.addEventListener("load", setLastTrack);
 
 trackList.addEventListener("click", clickTrack);
-
-document.addEventListener("keydown", (e) => {
-  if (e.code == "ArrowRight") {
-    nextTrack();
-  } else if (e.code == "ArrowLeft") {
-    prevTrack();
-  }
-});
