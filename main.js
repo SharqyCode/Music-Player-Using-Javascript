@@ -145,10 +145,7 @@ function updateDotlocation() {
 }
 
 let mousePos = 0,
-  dotPos = 0,
-  deltaPos = 0,
-  newPos = 0;
-
+  dotPos = 0;
 function dragDot(e) {
   mousePos = e.clientX;
   dotPos = dot.offsetLeft;
@@ -161,8 +158,8 @@ function dragEffect(e) {
   pauseAudio();
   dot.style.cursor = "grab";
 
-  deltaPos = e.clientX - mousePos;
-  newPos = dotPos + deltaPos;
+  let deltaPos = e.clientX - mousePos;
+  let newPos = dotPos + deltaPos;
 
   if (newPos > dot.parentElement.clientWidth) {
     newPos = dot.parentElement.clientWidth;
@@ -178,11 +175,6 @@ function leaveEffect() {
 
   const distanceRatio = dot.offsetLeft / dot.parentElement.clientWidth;
   const currentTime = Math.round(audio.duration * distanceRatio);
-  console.log("DOL: " + dot.offsetLeft);
-  console.log("DPW: " + dot.parentElement.clientWidth);
-  console.log("DR: " + distanceRatio);
-  console.log("AD: " + audio.duration);
-  console.log("CT: " + currentTime);
   audio.currentTime = currentTime.toPrecision(2);
   if (distanceRatio == 1) {
     nextTrack();
@@ -216,7 +208,7 @@ function loadTracks() {
   myAudios.forEach((audio) => {
     let track = document.createElement("li");
     let trackImg = document.createElement("img");
-    trackImg.src = "/images/pngimg.com - vinyl_PNG102.png";
+    trackImg.src = "images/pngimg.com - vinyl_PNG102.png";
     let trackInfo = document.createElement("div");
     trackInfo.classList.add("info");
     let songName = document.createElement("h3");
