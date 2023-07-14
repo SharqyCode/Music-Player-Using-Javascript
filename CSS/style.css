@@ -46,11 +46,13 @@ img,
   box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.2);
 }
 
-.card i:not(.play):hover {
+.card i:not(.play):hover,
+.card i:not(.pause):hover {
   background-color: #ddd;
 }
 
-.card i.play:hover {
+.card i.play:hover,
+.card i.pause:hover {
   background-color: #d14b87;
 }
 
@@ -72,6 +74,10 @@ img,
   height: 40px;
   font-size: 15px;
   border-radius: 50%;
+}
+
+.card .tools i.repeat-on {
+  background-color: #9a98ff;
 }
 
 .card .info {
@@ -129,11 +135,16 @@ img,
   font-size: 20px;
 }
 
-.card .controls .play {
+.card .controls .play,
+.card .controls .pause {
   background-color: var(--item-color);
   color: white;
   width: 100px;
   height: 100px;
   font-size: 28px;
   margin: 0px 20px;
+}
+
+.card .controls .pause {
+  display: none;
 }
