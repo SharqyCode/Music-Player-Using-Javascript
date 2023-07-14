@@ -61,6 +61,11 @@ function pauseAudio() {
 }
 
 function nextTrack() {
+  nextBtn.style.backgroundColor = "#9a98ff";
+  setTimeout(() => {
+    nextBtn.style.backgroundColor = "white";
+  }, 200);
+
   if (!isRepeat) {
     currentAudioIndex++;
     if (currentAudioIndex >= myAudios.length) {
@@ -72,6 +77,10 @@ function nextTrack() {
 }
 
 function prevTrack() {
+  prevBtn.style.backgroundColor = "#9a98ff";
+  setTimeout(() => {
+    prevBtn.style.backgroundColor = "white";
+  }, 200);
   currentAudioIndex--;
   if (currentAudioIndex < 0) {
     currentAudioIndex = myAudios.length - 1;
