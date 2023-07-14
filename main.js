@@ -55,18 +55,21 @@ const dot = document.querySelector(".dot");
 const trackList = document.querySelector(".tracks");
 
 function playAudio() {
-  const currentAudio = myAudios[currentAudioIndex];
-  const songTitle = document.querySelector(".card .info h2");
-  const songArtist = document.querySelector(".card .info p");
+  if (!isPlaying) {
+    const currentAudio = myAudios[currentAudioIndex];
+    const songTitle = document.querySelector(".card .info h2");
+    const songArtist = document.querySelector(".card .info p");
 
-  audio.src = currentAudio.file;
-  songTitle.textContent = currentAudio.title();
-  songArtist.textContent = currentAudio.artist();
-  dot.style.left = 0;
+    audio.src = currentAudio.file;
+    songTitle.textContent = currentAudio.title();
+    songArtist.textContent = currentAudio.artist();
+    dot.style.left = 0;
+  }
 
   Array.from(trackList.children).forEach((track) => {
     track.style.backgroundColor = "#ff5da6";
   });
+
   trackList.children[currentAudioIndex].style.backgroundColor = "#fff";
 
   record.style.animationPlayState = "running";
@@ -257,9 +260,9 @@ window.addEventListener("load", setLastTrack);
 trackList.addEventListener("click", clickTrack);
 
 document.addEventListener("keydown", (e) => {
-  if ((e.code = "ArrowRight")) {
+  if (e.code === "ArrowRight") {
     nextTrack();
-  } else if ((e.code = "ArrowLeft")) {
+  } else if (e.code === "ArrowLeft") {
     prevTrack();
   }
 });
