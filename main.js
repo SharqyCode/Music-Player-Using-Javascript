@@ -65,6 +65,12 @@ function playAudio() {
     songArtist.textContent = currentAudio.artist();
     dot.style.left = 0;
   }
+
+  Array.from(trackList.children).forEach((track) => {
+    track.style.backgroundColor = "#ff5da6";
+  });
+  trackList.children[currentAudioIndex].style.backgroundColor = "#fff";
+
   record.style.animationPlayState = "running";
   playBtn.style.display = "none";
   pauseBtn.style.display = "flex";
@@ -231,14 +237,6 @@ function clickTrack(e) {
 
   currentAudioIndex = tracks.indexOf(getTrackLi(e.target));
 
-  tracks.forEach((track) => {
-    track.style.backgroundColor = "#ff5da6";
-  });
-
-  trackList.children[currentAudioIndex].style.backgroundColor = "#fff";
-  // trackList.children[currentAudioIndex].setPointerCapture = false;
-  // console.log(indexNow);
-  // console.log(currentAudioIndex);
   isPlaying = !(indexNow == currentAudioIndex) ? false : true;
   playAudio();
 }
