@@ -41,12 +41,14 @@ let audio = new Audio();
 let currentAudioIndex = 0;
 let isPlaying = false;
 let isRepeat = false;
+let isShuffle = false;
 
 const playBtn = document.querySelector(".play");
 const pauseBtn = document.querySelector(".pause");
 const nextBtn = document.querySelector(".next");
 const prevBtn = document.querySelector(".back");
 const repeatBtn = document.querySelector(".repeat");
+const shuffleBtn = document.querySelector(".shuffle");
 const record = document.querySelector("img");
 const player = document.querySelector(".player");
 const dot = document.querySelector(".dot");
@@ -92,6 +94,9 @@ function nextTrack() {
       currentAudioIndex = 0;
     }
   }
+  if (isShuffle) {
+    currentAudioIndex = Math.floor(Math.random() * 4);
+  }
   isPlaying = false;
   playAudio();
 }
@@ -115,6 +120,15 @@ function toggleRepeat() {
     isRepeat = true;
   } else {
     isRepeat = false;
+  }
+}
+
+function toggleShuffle() {
+  shuffleBtn.classList.toggle("shuffle-on");
+  if (shuffleBtn.classList.contains("shuffle-on")) {
+    isShuffle = true;
+  } else {
+    isShuffle = false;
   }
 }
 
@@ -225,6 +239,7 @@ pauseBtn.addEventListener("click", pauseAudio);
 nextBtn.addEventListener("click", nextTrack);
 prevBtn.addEventListener("click", prevTrack);
 repeatBtn.addEventListener("click", toggleRepeat);
+shuffleBtn.addEventListener("click", toggleShuffle);
 
 player.addEventListener("click", scrub);
 dot.addEventListener("pointerdown", dragDot);
