@@ -2,7 +2,7 @@ let myAudios = [
   {
     file: "./music/Joachim Heinrich - Flying Kites.m4a",
     artist: function () {
-      return this.file.split(" - ")[0].substring(7);
+      return this.file.split(" - ")[0].substring(8);
     },
     title: function () {
       return this.file.split(" - ")[1].split(".")[0];
@@ -11,7 +11,7 @@ let myAudios = [
   {
     file: "./music/Kalp Kırıkları - Toygar Işıklı.mp3",
     artist: function () {
-      return this.file.split(" - ")[0].substring(7);
+      return this.file.split(" - ")[0].substring(8);
     },
     title: function () {
       return this.file.split(" - ")[1].split(".")[0];
@@ -20,7 +20,7 @@ let myAudios = [
   {
     file: "./music/Lost - Giles Lamb.m4a",
     artist: function () {
-      return this.file.split(" - ")[0].substring(7);
+      return this.file.split(" - ")[0].substring(8);
     },
     title: function () {
       return this.file.split(" - ")[1].split(".")[0];
@@ -29,7 +29,7 @@ let myAudios = [
   {
     file: "./music/Max Ritcher - On The Nature of Daylight.mp3",
     artist: function () {
-      return this.file.split(" - ")[0].substring(7);
+      return this.file.split(" - ")[0].substring(8);
     },
     title: function () {
       return this.file.split(" - ")[1].split(".")[0];
