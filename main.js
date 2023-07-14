@@ -1,6 +1,6 @@
 let myAudios = [
   {
-    file: "/music/Joachim Heinrich - Flying Kites.m4a",
+    file: "music/Joachim Heinrich - Flying Kites.m4a",
     artist: function () {
       return this.file.split(" - ")[0].substring(7);
     },
@@ -9,7 +9,7 @@ let myAudios = [
     },
   },
   {
-    file: "/music/Kalp Kırıkları - Toygar Işıklı.mp3",
+    file: "music/Kalp Kırıkları - Toygar Işıklı.mp3",
     artist: function () {
       return this.file.split(" - ")[0].substring(7);
     },
@@ -18,7 +18,7 @@ let myAudios = [
     },
   },
   {
-    file: "/music/Lost - Giles Lamb.m4a",
+    file: "music/Lost - Giles Lamb.m4a",
     artist: function () {
       return this.file.split(" - ")[0].substring(7);
     },
@@ -27,7 +27,7 @@ let myAudios = [
     },
   },
   {
-    file: "/music/Max Ritcher - On The Nature of Daylight.mp3",
+    file: "music/Max Ritcher - On The Nature of Daylight.mp3",
     artist: function () {
       return this.file.split(" - ")[0].substring(7);
     },
