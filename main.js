@@ -209,6 +209,7 @@ function loadTracks() {
     let track = document.createElement("li");
     let trackImg = document.createElement("img");
     trackImg.src = "images/pngimg.com - vinyl_PNG102.png";
+    trackImg.alt = "";
     let trackInfo = document.createElement("div");
     trackInfo.classList.add("info");
     let songName = document.createElement("h3");
