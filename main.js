@@ -1,15 +1,24 @@
 let element = document.querySelector(".dot");
-let player = document.querySelector(".player");
-// dot.addEventListener("pointerdown", () => {
-//   console.log("pointer down");
-//   dot.addEventListener("pointermove", (e) => {
-//     console.log("pointer moved");
-//     console.log(dot.offsetLeft);
-//   });
-// });
+let play = document.querySelector(".play");
 
-// var element = document.getElementById("myElement");
-// var element = document.getElementById("myElement");
+let audio = new Audio("/music/Kalp Kırıkları - Toygar Işıklı.mp3");
+
+play.addEventListener("click", () => {
+  if (play.classList.contains("fa-play")) {
+    audio.play();
+  } else {
+    audio.pause();
+  }
+  play.classList.toggle("fa-play");
+  play.classList.toggle("fa-pause");
+});
+
+let count = 0;
+audio.addEventListener("progress", () => {
+  element.style.left = count + "px";
+  count += 2;
+});
+
 let pos1 = 0,
   pos3 = 0;
 element.onmousedown = dragMouseDown;
@@ -19,12 +28,18 @@ function dragMouseDown(e) {
   // get the mouse cursor position at startup:
   pos3 = e.clientX;
   // call a function whenever the cursor moves:
-  document.onmousemove = elementDrag;
+  document.addEventListener("pointermove", elementDrag);
   // call a function when the cursor is released:
-  document.onmouseup = closeDragElement;
+  document.addEventListener("pointerup", closeDragElement);
 }
 
 function elementDrag(e) {
+  if (play.classList.contains("fa-pause")) {
+    audio.pause();
+    play.classList.toggle("fa-play");
+    play.classList.toggle("fa-pause");
+  }
+
   e.preventDefault();
   // calculate the new cursor position:
   pos1 = pos3 - e.clientX;
@@ -42,7 +57,11 @@ function elementDrag(e) {
 }
 
 function closeDragElement() {
+  audio.play();
+  play.classList.toggle("fa-play");
+  play.classList.toggle("fa-pause");
   // stop moving when mouse button is released:
-  document.onmouseup = null;
-  document.onmousemove = null;
+  document.removeEventListener("pointermove", elementDrag);
+  // call a function when the cursor is released:
+  document.removeEventListener("pointerup", closeDragElement);
 }
