@@ -127,6 +127,8 @@ function dragEffect(e) {
   pauseAudio();
   e.preventDefault();
 
+  dot.style.cursor = "grab";
+
   currentPos = firstPos - e.clientX;
   firstPos = e.clientX;
 
