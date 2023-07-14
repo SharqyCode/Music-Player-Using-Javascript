@@ -29,7 +29,7 @@ const nextBtn = document.querySelector(".next");
 const prevBtn = document.querySelector(".back");
 const repeatBtn = document.querySelector(".repeat");
 const record = document.querySelector("img");
-
+const player = document.querySelector(".player");
 const dot = document.querySelector(".dot");
 
 function playAudio() {
@@ -155,12 +155,19 @@ function leaveEffect() {
   document.removeEventListener("pointerup", leaveEffect);
 }
 
+function scrub(e) {
+  let rect = e.target.getBoundingClientRect();
+  dot.style.left = e.clientX - rect.left + "px";
+  leaveEffect();
+}
+
 playBtn.addEventListener("click", playAudio);
 pauseBtn.addEventListener("click", pauseAudio);
 nextBtn.addEventListener("click", nextTrack);
 prevBtn.addEventListener("click", prevTrack);
 repeatBtn.addEventListener("click", toggleRepeat);
 
+player.addEventListener("click", scrub);
 dot.addEventListener("pointerdown", dragDot);
 
 audio.addEventListener("ended", nextTrack);
