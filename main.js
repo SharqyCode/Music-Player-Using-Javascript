@@ -165,15 +165,18 @@ function dragEffect(e) {
 }
 
 function leaveEffect() {
-  const distanceRatio = dot.offsetLeft / dot.parentElement.clientWidth;
+  const distanceRatio =
+    Number.parseInt(dot.style.left) / dot.parentElement.clientWidth;
   const currentTime = audio.duration * distanceRatio;
-
+  // console.log(distanceRatio);
+  // console.log(currentTime);
   audio.currentTime = currentTime.toPrecision(2);
   if (distanceRatio == 1) {
     nextTrack();
   } else if (distanceRatio == 0) {
     prevTrack();
   } else {
+    isPlaying = true;
     playAudio();
   }
   document.removeEventListener("pointermove", dragEffect);
@@ -183,6 +186,7 @@ function leaveEffect() {
 function scrub(e) {
   let rect = e.target.getBoundingClientRect();
   dot.style.left = e.clientX - rect.left + "px";
+  // console.log(dot.style.left);
   leaveEffect();
 }
 
@@ -218,11 +222,18 @@ function loadTracks() {
 
 function clickTrack(e) {
   const indexNow = currentAudioIndex;
-  currentAudioIndex = Array.from(trackList.children).indexOf(
-    getTrackLi(e.target)
-  );
-  console.log(indexNow);
-  console.log(currentAudioIndex);
+  const tracks = Array.from(trackList.children);
+
+  currentAudioIndex = tracks.indexOf(getTrackLi(e.target));
+
+  tracks.forEach((track) => {
+    track.style.backgroundColor = "#ff5da6";
+  });
+
+  trackList.children[currentAudioIndex].style.backgroundColor = "#fff";
+  // trackList.children[currentAudioIndex].setPointerCapture = false;
+  // console.log(indexNow);
+  // console.log(currentAudioIndex);
   isPlaying = !(indexNow == currentAudioIndex) ? false : true;
   playAudio();
 }
