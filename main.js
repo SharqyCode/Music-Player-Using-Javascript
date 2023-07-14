@@ -209,7 +209,7 @@ function clickTrack(e) {
   );
   console.log(indexNow);
   console.log(currentAudioIndex);
-  isPlaying = false;
+  isPlaying = !(indexNow == currentAudioIndex) ? false : true;
   playAudio();
 }
 
